@@ -1,26 +1,47 @@
-let buttonPlay = document.querySelector("#btn-play")
-let buttonPause = document.querySelector("#btn-pause")
+let drumkitContainer = document.querySelector(".drumkit")
 
-let buttonStop = document.querySelector("#btn-stop")
 
-let audioElement = document.querySelector("#clap-sound")
+// Create element with javascript :)
 
-function playSound() {
-    // play a sound:
-    audioElement.play()
-} 
+// #1 create the element (in memory)
+let myElement = document.createElement("h1")
+// #2 adjust properties...
+myElement.textContent = "Hi"
+// #3 append the element somewhere on the page...
+drumkitContainer.append(myElement)
 
-function pauseSound() {
+// change the text on my element:
 
-    audioElement.pause()
+myElement.textContent = "Bye"
+
+// utility functions to create custom elements:
+
+let element;
+
+// creates a button, with given textContent
+function createButton(text) {
+    element = document.createElement("button")
+    element.textContent = text
+
+    return element
 }
 
-function stopSound() {
+let clap = createButton("clap")
+let kick = createButton("kick")
 
-    audioElement.pause()
-    audioElement.currentTime = 0
+drumkitContainer.append(clap, kick)
+
+
+// creates an audio element, with given source
+function createAudio(source) {
+    element = document.createElement("audio")
+    element.src = source
+
+    return element
 }
 
-buttonPlay.addEventListener("click", playSound)
-buttonPause.addEventListener("click", pauseSound)
-buttonStop.addEventListener("click", stopSound)
+let testAudio = createAudio("sounds/acoustic-cymbal-d4jp-r-f1.ogg")
+
+testAudio.controls = true
+
+drumkitContainer.append(testAudio)
