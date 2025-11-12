@@ -52,14 +52,16 @@ function createAudio(source) {
 
 // loop through the sounds array, and create the buttons based on name property
 
-sounds.forEach(sound => {
+sounds.forEach(soundObject => {
     // drumkitContainer.append( createButton(sound.name))
 
     // drumkitContainer.append( createAudio("sounds/" + sound.fileName))
     // create the button, and store in a variable
-    let button = createButton(sound.name)
+    let button = createButton(soundObject.name)
     // create the audio tag, and set its source
-    let audio = createAudio("sounds/" + sound.fileName)
+    let audio = createAudio("sounds/" + soundObject.fileName)
+    // create a property caleld audioTag in the object of the array
+    soundObject.audioTag = createAudio("sounds/" + soundObject.fileName)
 
     // create an event listener on button press
     button.addEventListener("pointerdown", function() {
@@ -77,3 +79,25 @@ sounds.forEach(sound => {
     drumkitContainer.append(button)
 })
 
+console.log(sounds)
+
+window.addEventListener("keydown", function(eventInfo) {
+    // 1. which key was pressed
+    console.log(eventInfo.key)
+    // 2. if key exists in sounds array, do something
+    // loop throgh sounds array and find out if a matching hotkey exists
+    sounds.forEach(sound => {
+        if (sound.hotkey == eventInfo.key) {
+            sound.audioTag.play()
+        }
+    })
+})
+
+window.addEventListener("keyup", function(eventInfo) {
+    sounds.forEach(sound => {
+        if (sound.hotkey == eventInfo.key) {
+            sound.audioTag.pause()
+            sound.audioTag.currentTime = 0
+        }
+    })
+})
