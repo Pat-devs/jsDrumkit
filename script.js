@@ -18,17 +18,12 @@ let sounds = [
         fileName: "acoustic-cymbal-d4jp-r-f1.ogg",
         hotkey: "w"
     },
+    {
+        name: "hihat",
+        fileName: "acoustic-hihat-d4jp-ch-f1.ogg",
+        hotkey: "e"
+    },
 ];
-
-/*
-// search in the soudns array for things that match a certain criteria...
-// in this example, we look for something with the property-name "cymbal"
-// if something is found it will then return the value (in our case an object with both name, fileName and hokey)
-// if nothing matches the criteria, then it will just return undefined
-let myClap = sounds.find(value => value.name == "cymbal")
-
-console.log(myClap.hotkey)
-*/
 
 // get the drumkit container
 let drumkitContainer = document.querySelector(".drumkit")
@@ -44,69 +39,41 @@ function createButton(text) {
     return element
 }
 
-//let clap = createButton(sounds[0].name)
-//let kick = createButton(sounds[1].name)
-
-//drumkitContainer.append(sounds[0].name, sounds[1].name)
-
-// loops...
-
-// forEach
-
-sounds.forEach(value => {
-    // do something with value...
-    console.log(value)
-})
-
-sounds.forEach(function(value) {
-    console.log(value.hotkey)
-})
-
-
-// an example array of people:
-
-let people = [
-  { name: "Ava Johnson", age: 28 },
-  { name: "Liam Patel", age: 34 },
-  { name: "Sofia Müller", age: 22 },
-  { name: "Noah García", age: 41 },
-  { name: "Mia Nguyen", age: 22 },
-  { name: "Ethan Rossi", age: 22 },
-  { name: "Olivia Kim", age: 26 },
-  { name: "Liam Patel", age: 37 },
-  { name: "Emma Dubois", age: 24 },
-  { name: "Lucas Andersen", age: 32 }
-];
-
-let oldPeople = people.filter(person => person.age > 30 && person.age < 40 && person.name == "Liam Patel")
-
-console.log(oldPeople)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // creates an audio element, with given source
 function createAudio(source) {
     element = document.createElement("audio")
     element.src = source
+    element.controls = true
 
     return element
 }
 
-let testAudio = createAudio("sounds/acoustic-cymbal-d4jp-r-f1.ogg")
+// drumkitContainer.append(createButton("test"))
 
-// testAudio.controls = true
+// loop through the sounds array, and create the buttons based on name property
 
-drumkitContainer.append(testAudio)
+sounds.forEach(sound => {
+    // drumkitContainer.append( createButton(sound.name))
+
+    // drumkitContainer.append( createAudio("sounds/" + sound.fileName))
+    // create the button, and store in a variable
+    let button = createButton(sound.name)
+    // create the audio tag, and set its source
+    let audio = createAudio("sounds/" + sound.fileName)
+
+    // create an event listener on button press
+    button.addEventListener("pointerdown", function() {
+        // event logic goes here..
+        audio.play()
+    } )
+
+    // create an event to stop the audio on button release
+    button.addEventListener("pointerup", function() {
+        // stop the sound playback...
+        audio.pause()
+        audio.currentTime = 0
+    })
+
+    drumkitContainer.append(button)
+})
+
