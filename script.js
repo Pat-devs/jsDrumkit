@@ -45,3 +45,39 @@ let testAudio = createAudio("sounds/acoustic-cymbal-d4jp-r-f1.ogg")
 testAudio.controls = true
 
 drumkitContainer.append(testAudio)
+
+
+
+// a bit about return statement
+
+// function takes two arguments (a and b) and prints the sum
+// function sum(a, b, output) {
+//     let result = a + b
+//     // print the sum
+//     console.log(result)
+// }
+
+// sum(2,2)
+
+// sum(2,50915)
+
+// // function takes two arguments (a and b) and prints the on the webpage
+// function sumOnWebpage(a, b) {
+//     let result = a + b
+//     // get the #calc-result element
+//     let resultElement = document.querySelector("#calc-result")
+//     resultElement.textContent = result
+// }
+
+// sumOnWebpage(5,5)
+
+// function takes two arguments (a and b) and returns the sum
+function sum(a, b) {
+    let result = a + b
+    return result
+}
+
+console.log(sum(2,2))
+
+let resultElement = document.querySelector("#calc-result")
+resultElement.textContent = sum(2135,2)
