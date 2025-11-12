@@ -6,10 +6,7 @@ let kickSound = "acoustic-kick-dd2-dk-k-f2.ogg"
 let shakerSound = "acoustic-shaker-dd2-dk-sh-5.ogg"
 let snareSound = "acoustic-snare-d3-gk-sn-f1.ogg"
 
-// let sounds = [clapSound, cymbalSound]
-
-// console.log(sounds[1])
-
+// sounds array, holds objects that include each sounds name, filename and hotkeys
 let sounds = [
     {
         name: "clap",
@@ -23,8 +20,7 @@ let sounds = [
     },
 ];
 
-console.log(sounds[0].name  )
-
+/*
 // search in the soudns array for things that match a certain criteria...
 // in this example, we look for something with the property-name "cymbal"
 // if something is found it will then return the value (in our case an object with both name, fileName and hokey)
@@ -32,9 +28,11 @@ console.log(sounds[0].name  )
 let myClap = sounds.find(value => value.name == "cymbal")
 
 console.log(myClap.hotkey)
+*/
 
-
+// get the drumkit container
 let drumkitContainer = document.querySelector(".drumkit")
+
 
 // utility functions to create custom elements:
 
@@ -46,14 +44,43 @@ function createButton(text) {
     return element
 }
 
-let clap = createButton("clap")
-let kick = createButton("kick")
+//let clap = createButton(sounds[0].name)
+//let kick = createButton(sounds[1].name)
 
-drumkitContainer.append(clap, kick)
+//drumkitContainer.append(sounds[0].name, sounds[1].name)
+
+// loops...
+
+// forEach
+
+sounds.forEach(value => {
+    // do something with value...
+    console.log(value)
+})
+
+sounds.forEach(function(value) {
+    console.log(value.hotkey)
+})
 
 
+// an example array of people:
 
+let people = [
+  { name: "Ava Johnson", age: 28 },
+  { name: "Liam Patel", age: 34 },
+  { name: "Sofia Müller", age: 22 },
+  { name: "Noah García", age: 41 },
+  { name: "Mia Nguyen", age: 22 },
+  { name: "Ethan Rossi", age: 22 },
+  { name: "Olivia Kim", age: 26 },
+  { name: "Liam Patel", age: 37 },
+  { name: "Emma Dubois", age: 24 },
+  { name: "Lucas Andersen", age: 32 }
+];
 
+let oldPeople = people.filter(person => person.age > 30 && person.age < 40 && person.name == "Liam Patel")
+
+console.log(oldPeople)
 
 
 
